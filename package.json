@@ -1,0 +1,18 @@
+{
+  "name": "chat",
+  "version": "v4.2.4",
+  "private": true,
+  "scripts": {
+    "start": "node ./app.js"
+  },
+  "dependencies": {
+    "async": "^2.0.1",
+    "bluebird": "^2.9.24",
+    "body-parser": "~1.15.2",
+    "cookie-parser": "~1.4.3",
+    "express": "^4.14.0",
+    "mongoose": "^4.6.2",
+    "socket.io": "^1.4.8",
+    "underscore": "^1.8.3"
+  }
+}
