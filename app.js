@@ -138,7 +138,6 @@ io.sockets.on('connection',function(socket){
             messages.push(data);
             io.sockets.in(data2).emit('get Msg', messages);
         })
-
     });
 
 // In case user changes the room\
@@ -147,13 +146,11 @@ io.sockets.on('connection',function(socket){
         console.log(random);
         console.log(oldRoom);
         console.log(newRoom);
-
         socket.leave(oldRoom);
         socket.join(newRoom);
         socket.broadcast.to(oldRoom).emit('user left');
         socket.broadcast.to(newRoom).emit('user joined1');
         //io.sockets.emit('room changed', newRoom);
-
     });
 })
 server.listen(3000);

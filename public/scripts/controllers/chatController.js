@@ -57,7 +57,7 @@ myApp.controller('controller', function($scope, $http, $timeout, socket){
         socket.on('newuser joined', function(name){
             $scope.room = data.name;
             $scope.joined = $scope.name + " " + "joined the room";
-           alert($scope.joined);
+            alert($scope.joined);
         })
         socket.on('default group', function(data) {
         $scope.roomId = data._id;
