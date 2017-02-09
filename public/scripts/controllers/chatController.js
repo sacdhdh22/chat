@@ -11,10 +11,10 @@ myApp.controller('controller', function($scope, $http, $timeout, socket){
     var random =Math.random();
 
     //Modal to input your name
-    $('#entername').modal({
-        backdrop: 'static',
-        keyboard: false
-    })
+//    $('#entername').modal({
+//        backdrop: 'static',
+//        keyboard: false
+//    })
   //Fetch all the rooms that are available for chat iniatially
     socket.emit('get Rooms', {});
      socket.on('got rooms', function(data) {
@@ -78,10 +78,15 @@ myApp.controller('controller', function($scope, $http, $timeout, socket){
 
    //Sending message from user
     $scope.sendMessage = function(msg) {
-       socket.emit('send msg', msg, $scope.name,  $scope.roomId);
+        socket.emit('send msg', msg, $scope.name,  $scope.roomId);
         socket.on('get Msg', function(data) {
-            $scope.messages = data;
-            $scope.$digest();
+         console.log(data);
+        //$scope.messages.push({'content' : data});
+        $scope.messages = data;
+        console.log($scope.messages);
+        console.log($scope.messages[0].content);
+        $scope.$digest();
         });
+
         };
 });

@@ -13,6 +13,7 @@ var Room = require('./model/rooms.js');
 var Msg = require('./model/message.js');
 var Message = require('./model/message.js');
 var _ = require('underscore');
+var _ = require('lodash');
 //connection
 mongoose.connect('mongodb://localhost/chatapp');
 //var route = require('./serverApi');
@@ -128,16 +129,29 @@ io.sockets.on('connection',function(socket){
     //
     //});
 
-
+    var arr = ["Sorry ComeAgain..!"];
     socket.on('send msg', function(data, data1, data2){
-     var message = new Msg();
-        message.content = data;
-        message.senderName = data1;
-        message.room = data2;
-        Msg.create(message, function(err, data){
-            messages.push(data);
-            io.sockets.in(data2).emit('get Msg', messages);
-        })
+     Message.compareStrings1(data, function(err, doc){
+     if(err)
+        io.sockets.emit('get Msg', arr);
+     else if(doc.length == 0)
+        io.sockets.emit('get Msg', arr);
+     else
+     {
+       var a  = _.map(doc, 'reply');
+       console.log(a);
+       io.sockets.emit('get Msg',a);
+     }
+     })
+
+//     var message = new Msg();
+//        message.content = data;
+//        message.senderName = data1;
+//        message.room = data2;
+//        Msg.create(message, function(err, data){
+//            messages.push(data);
+//            io.sockets.in(data2).emit('get Msg', messages);
+//        })
     });
 
 // In case user changes the room\
